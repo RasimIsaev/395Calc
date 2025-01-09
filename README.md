@@ -21,7 +21,7 @@
 
 1. Скачайте проект или клонируйте репозиторий:  
    ```bash
-   git clone https://github.com/ваш-логин/имя-репозитория.git
+   git clone https://github.com/RasimIsaev/395Calc.git
    ```
 2. Откройте файл index.html в любом современном браузере.
 3. Ознакомьтесь с таблицей расчётов.
