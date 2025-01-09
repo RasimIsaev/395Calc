@@ -1,0 +1,98 @@
+/* styles.css */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4; /* Светлый фон для контраста */
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto; /* Центрируем контейнер */
+    padding: 20px;
+    background-color: #ffffff; /* Белый фон для контейнера */
+    border-radius: 8px; /* Закругленные углы */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+h1 {
+    color: #333; /* Темный цвет заголовка */
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #555; /* Более светлый цвет для подзаголовка */
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+.add-remove-buttons {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007BFF; /* Основной цвет кнопок */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Плавный переход цвета */
+}
+
+button:hover {
+    background-color: #0056b3; /* Цвет кнопки при наведении */
+}
+
+.object {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc; /* Светлая граница */
+    border-radius: 5px;
+    background-color: #f9f9f9; /* Светлый фон для объектов */
+}
+
+.object-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.object-header strong {
+    font-weight: bold;
+}
+
+.result {
+    white-space: pre-wrap;
+    background: #e9ecef; /* Светло-серый фон для результата */
+    padding: 10px;
+    border: 1px solid #ccc; /* Светлая граница */
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.object label {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.object input {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.object .period-inputs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.object .period-inputs input {
+    width: calc(50% - 5px);
+}
