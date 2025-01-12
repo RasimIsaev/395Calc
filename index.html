@@ -265,15 +265,36 @@ document.getElementById('calculate').addEventListener('click', () => {
         });
     });
 
-    // Создание документа с разделением на абзацы
-    const doc = new docx.Document({
-        sections: [
-            {
-                properties: {},
-                children: paragraphs, // Массив абзацев
+// Создание верхнего колонтитула
+const header = new docx.Header({
+    children: [
+        new docx.Paragraph({
+            alignment: docx.AlignmentType.CENTER, // Выравнивание по центру
+            children: [
+                new docx.TextRun({
+                    text: "Проценты по ст. 395 ГК РФ", // Текст колонтитула
+                    font: "Times New Roman", // Шрифт
+                    size: 24, // Размер шрифта (12pt)
+                    bold: true, // Жирное выделение
+                }),
+            ],
+        }),
+    ],
+});
+
+// Создание документа с верхним колонтитулом
+const doc = new docx.Document({
+    sections: [
+        {
+            properties: {},
+            headers: {
+                default: header, // Установка верхнего колонтитула
             },
-        ],
-    });
+            children: paragraphs, // Массив абзацев
+        },
+    ],
+});
+
 
     // Генерация и скачивание DOCX-файла
     docx.Packer.toBlob(doc).then((blob) => {
