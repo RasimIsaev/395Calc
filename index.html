@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Проценты по 395 ГК РФ</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/docx@7.6.0/build/index.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -20,6 +21,7 @@
         <h2>Результат:</h2>
         <div class="result" id="result">Здесь отобразится результат расчета.</div>
         <button id="copyResult" style="display: block; margin: 20px auto;">Скопировать результат</button>
+	<button id="exportToDocx" style="display: block; margin: 20px auto;">Экспортировать в DOCX</button>
     </div>
 
     <script>
@@ -215,6 +217,59 @@
 
             return periods;
         }
+ document.getElementById('exportToDocx').addEventListener('click', () => {
+        const resultContent = document.getElementById('result').innerText;
+
+    // Собираем наименования объектов из полей ввода
+    const objectNames = Array.from(document.querySelectorAll('.object-name'))
+        .map(input => input.value.trim())
+        .filter(name => name !== ""); // Убираем пустые значения
+
+    // Разделяем текст на строки
+    const lines = resultContent.split('\n');
+
+    // Преобразуем каждую строку в отдельный абзац
+    const paragraphs = lines.map(line => {
+        // Проверяем, содержит ли строка одно из наименований объектов
+        const isObjectName = objectNames.some(name => line.includes(name));
+        
+        return new docx.Paragraph({
+            alignment: docx.AlignmentType.JUSTIFIED,
+            spacing: {
+                line: 360, // Межстрочный интервал
+                before: 200, // Отступ перед абзацем
+                after: 200,  // Отступ после абзацем
+            },
+            children: [
+                new docx.TextRun({
+                    text: line.trim(), // Убираем лишние пробелы
+                    font: "Times New Roman",
+                    size: 24, // Размер шрифта (12pt)
+                    bold: isObjectName, // Жирный текст для строк с именем объекта
+                }),
+            ],
+        });
+    });
+
+    // Создание документа с разделением на абзацы
+    const doc = new docx.Document({
+        sections: [
+            {
+                properties: {},
+                children: paragraphs, // Массив абзацев
+            },
+        ],
+    });
+
+    // Генерация и скачивание DOCX-файла
+    docx.Packer.toBlob(doc).then((blob) => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "Расчет.docx";
+        link.click();
+    });
+});
+
     </script>
 </body>
 </html>
